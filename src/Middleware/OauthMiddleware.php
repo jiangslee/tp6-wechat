@@ -15,7 +15,6 @@ use think\facade\Session;
 
 class OauthMiddleware
 {
-
     /**
      * 执行中间件
      *
@@ -26,19 +25,18 @@ class OauthMiddleware
      */
     public function handle(Request $request, \Closure $next, $param = null)
     {
-
-        $params  = $this->getParam($param);
+        $params = $this->getParam($param);
         $account = $params["account"];
-        $scopes  = $params["scopes"];
+        $scopes = $params["scopes"];
         //定义session
         $session_key = 'wechat_oauth_user_' . $account;
-        $session     = Session::get($session_key);
+        $session = Session::get($session_key);
         /** @var Application $officialAccount */
         $officialAccount = app(sprintf('wechat.official_account.%s', $account));
         if (!$scopes) {
             $scopes = config(sprintf('wechat.official_account.%s.oauth.scopes', $account));
         }
-        if (!$scopes){
+        if (!$scopes) {
             $scopes = ['snsapi_base'];
         }
         if (is_string($scopes)) {
@@ -68,14 +66,14 @@ class OauthMiddleware
     {
         //定义初始化
         $res["account"] = "default";
-        $res['scopes']  = null;
+        $res['scopes'] = null;
         if (!$params) {
             return $res;
         }
         //解析
-        $result  = explode(":", $params);
+        $result = explode(":", $params);
         $account = "";
-        $scopes  = "";
+        $scopes = "";
         if (isset($result[0])) {
             $account = $result[0];
         }

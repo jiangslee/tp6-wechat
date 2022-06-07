@@ -55,5 +55,4 @@ class CacheBridge implements CacheInterface
     {
         return !is_null($this->cache->get($key));
     }
-
 }

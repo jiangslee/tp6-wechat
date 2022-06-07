@@ -21,14 +21,12 @@ function injectThinkLoggerToWechatApp($app)
         return;
     }
     // 注册自定义日志驱动
-    new class($app)
-    {
+    new class ($app) {
         public function __construct($app)
         {
             $app->logger->extend('thinkphp', function ($app, $config) {
                 return new \Monolog\Logger($this->parseChannel($config), [
-                    $this->prepareHandler(new class($this->level($config)) extends AbstractProcessingHandler
-                    {
+                    $this->prepareHandler(new class ($this->level($config)) extends AbstractProcessingHandler {
                         protected function write(array $record)
                         {
                             Log::record(rtrim($record['formatted'], "\n"), strtolower($record['level_name'] ?? 'info'));

@@ -11,7 +11,7 @@ return [
     /*
       * 默认配置，将会合并到各模块中
       */
-    'default'         => [
+    'default' => [
         /*
          * 指定 API 调用返回结果的类型：array(default)/object/raw/自定义类名
          */
@@ -19,7 +19,7 @@ return [
         /*
          * 使用 ThinkPHP 的缓存系统
          */
-        'use_tp_cache'  => true,
+        'use_tp_cache' => true,
         /*
          * 日志配置
          *
@@ -27,17 +27,17 @@ return [
          *                 debug/info/notice/warning/error/critical/alert/emergency
          * file：日志文件位置(绝对路径!!!)，要求可写权限
          */
-        'log'           => [
-            'default'  => 'default',
+        'log' => [
+            'default' => 'default',
             'channels' => [
                 'thinkphp' => [
                     'driver' => 'thinkphp',
-                    'level'  => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
+                    'level' => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
                 ],
-                'default'  => [
+                'default' => [
                     'driver' => 'daily',
-                    'level'  => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
-                    'path'   => env('WECHAT.WECHAT_LOG_FILE', app()->getRuntimePath() . "log/wechat.log"),
+                    'level' => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
+                    'path' => env('WECHAT.WECHAT_LOG_FILE', app()->getRuntimePath() . "log/wechat.log"),
                 ],
             ],
         ],
@@ -89,18 +89,18 @@ return [
     //],
 
     //支付
-    'payment'          => [
+    'payment' => [
         'default' => [
-            'app_id'     => env('WECHAT.WECHAT_PAYMENT_APPID', ''),
-            'mch_id'     => env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
-            'secret_key'        => env('WECHAT.WECHAT_PAYMENT_KEY', 'key-for-signature'),
-            'v2_secret_key'        => env('WECHAT.WECHAT_PAYMENT_V2_KEY', 'key-for-signature'),
-            // 商户证书: 
+            'app_id' => env('WECHAT.WECHAT_PAYMENT_APPID', ''),
+            'mch_id' => env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
+            'secret_key' => env('WECHAT.WECHAT_PAYMENT_KEY', 'key-for-signature'),
+            'v2_secret_key' => env('WECHAT.WECHAT_PAYMENT_V2_KEY', 'key-for-signature'),
+            // 商户证书:
             // root_path/certs/1123123123/application_cert.pem
             // root_path/certs/1123123123/application_key.pem
-            'certificate'  => root_path('certs') .  env('WECHAT.WECHAT_PAYMENT_CERT_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_cert.pem'),    // XXX: 绝对路径！！！！
-            'private_key'   => root_path('certs').  env('WECHAT.WECHAT_PAYMENT_KEY_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_key.pem'),      // XXX: 绝对路径！！！！
-            'notify_url' => env('WECHAT_PAYMENT_NOTIFY_URL','http://example.com/payments/wechat-notify'),                           // 默认支付结果通知地址
+            'certificate' => root_path('certs') .  env('WECHAT.WECHAT_PAYMENT_CERT_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_cert.pem'),    // XXX: 绝对路径！！！！
+            'private_key' => root_path('certs').  env('WECHAT.WECHAT_PAYMENT_KEY_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_key.pem'),      // XXX: 绝对路径！！！！
+            'notify_url' => env('WECHAT_PAYMENT_NOTIFY_URL', 'http://example.com/payments/wechat-notify'),                           // 默认支付结果通知地址
 
             // 平台证书：微信支付 APIv3 平台证书，需要使用工具下载
             // 下载工具：https://github.com/wechatpay-apiv3/CertificateDownloader

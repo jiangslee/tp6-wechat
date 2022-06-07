@@ -4,13 +4,15 @@
     "type": "think-extend",
     "keywords": ["wechat", "weixin","easywechat","thinkphp","think", "sdk"],
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=8.0.2",
         "psr/simple-cache": "^1.0",
         "w7corp/easywechat": "~6.6.0"
     },
     "require-dev": {
         "topthink/framework":"^6.0.12",
-        "monolog/monolog": "^2.0"
+        "monolog/monolog": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "brainmaestro/composer-git-hooks": "dev-prepare-for-symfony-6"
     },
     "license": "MIT",
     "authors": [
@@ -38,10 +40,46 @@
             "config":{
                 "wechat": "src/config.php"
             }
+        },
+        "hooks": {
+            "pre-commit": [
+                "composer check-style"
+            ],
+            "pre-push": [
+                "composer check-style"
+            ]
         }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "cghooks remove",
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "post-merge": "composer install",
+        "post-install-cmd": [
+            "cghooks remove",
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "cghooks": "vendor/bin/cghooks",
+        "check-style": "php-cs-fixer fix --using-cache=no --diff --dry-run --ansi",
+        "fix-style": "php-cs-fixer fix --using-cache=no --ansi"
+    },
+    "scripts-descriptions": {
+        "check-style": "Run style checks (only dry run - no fixing!).",
+        "fix-style": "Run style checks and fix violations."
     },
     "config": {
         "allow-plugins": {
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/Jubeki/composer-git-hooks"
+        }
+    ]
 }
