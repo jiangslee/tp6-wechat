@@ -20,7 +20,7 @@ class Facade extends ThinkFacade
      *
      * @return string
      */
-    public static function getFacadeAccessor()
+    public static function getFacadeAccessor(): string
     {
         return 'wechat.official_account';
     }
