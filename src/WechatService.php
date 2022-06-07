@@ -6,7 +6,7 @@ use EasyWeChat\MiniProgram\Application as MiniProgram;
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Application as OpenPlatform;
 use EasyWeChat\OpenWork\Application as OpenWork;
-use EasyWeChat\Payment\Application as Payment;
+use EasyWeChat\Pay\Application as Payment;
 use EasyWeChat\Work\Application as Work;
 use think\Service;
 
