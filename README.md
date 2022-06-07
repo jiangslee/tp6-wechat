@@ -9,7 +9,7 @@ ThinkPHP >= 6.0
 ## 安装
 
 ```bash
-composer require jiangslee/think-wechat
+composer require jiangslee/think-wechat:dev-ew6 -vvv
 ```
 
 ## 配置
@@ -54,11 +54,10 @@ class Wechat extends BaseController
 use jiangslee\ThinkWechat\Facade;
 
 $officialAccount = Facade::officialAccount();  // 公众号
-$work = Facade::work(); // 企业微信
-$openwork = Facade::open_work(); // 企业微信第三方服务商
+$miniApp = Facade::miniApp(); // 小程序
 $payment = Facade::payment(); // 微信支付
 $openPlatform = Facade::openPlatform(); // 开放平台
-$miniProgram = Facade::miniProgram(); // 小程序
+$work = Facade::work(); // 企业微信
 $openWork = Facade::openWork(); // 企业微信第三方服务商
 ```
 

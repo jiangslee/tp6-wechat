@@ -58,9 +58,9 @@ class Facade extends ThinkFacade
     /**
      * @return \EasyWeChat\MiniProgram\Application|object|\think\App
      */
-    public static function miniProgram($name = '',$config = [])
+    public static function miniApp($name = '',$config = [])
     {
-        $app = $name ? app('wechat.mini_program.' . $name,  ["config"=>$config]) : app('wechat.mini_program',  ["config"=>$config]);
+        $app = $name ? app('wechat.mini_app.' . $name,  ["config"=>$config]) : app('wechat.mini_app',  ["config"=>$config]);
         injectThinkLoggerToWechatApp($app);
         return $app;
     }
@@ -82,16 +82,6 @@ class Facade extends ThinkFacade
     public static function openWork($name = '',$config = [])
     {
         $app = $name ? app('wechat.open_work.' . $name,  ["config"=>$config]) : app('wechat.open_work',  ["config"=>$config]);
-        injectThinkLoggerToWechatApp($app);
-        return $app;
-    }
-
-    /**
-     * @return \EasyWeChat\MicroMerchant\Application|object|\think\App
-     */
-    public static function microMerchant($name = '',$config = [])
-    {
-        $app = $name ? app('wechat.micro_merchant.' . $name,  ["config"=>$config]) : app('wechat.micro_merchant',  ["config"=>$config]);
         injectThinkLoggerToWechatApp($app);
         return $app;
     }

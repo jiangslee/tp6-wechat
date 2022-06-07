@@ -79,7 +79,7 @@ return [
     //],
 
     //小程序
-    //'mini_program'     => [
+    //'mini_app'     => [
     //    'default' => [
     //        'app_id'  => env('WECHAT.WECHAT_MINI_PROGRAM_APPID', ''),
     //        'secret'  => env('WECHAT.WECHAT_MINI_PROGRAM_SECRET', ''),
@@ -135,14 +135,6 @@ return [
     //    'default' => [
     //        //参考EasyWechat官方文档
     //        //https://www.easywechat.com/docs/4.1/open-work/index
-    //    ],
-    //],
-
-    //小微商户
-    //'micro_merchant'   => [
-    //    'default' => [
-    //        //参考EasyWechat官方文档
-    //        //https://www.easywechat.com/docs/4.1/micro-merchant/index
     //    ],
     //],
 

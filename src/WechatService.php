@@ -1,7 +1,6 @@
 <?php
 namespace jiangslee\ThinkWechat;
 
-use app\Request;
 use EasyWeChat\MiniApp\Application as MiniApp;
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Application as OpenPlatform;
@@ -25,7 +24,7 @@ class WechatService extends Service
         $apps = [
             'official_account' => OfficialAccount::class,
             'work'             => Work::class,
-            'mini'             => MiniApp::class,
+            'mini_app'         => MiniApp::class,
             'payment'          => Payment::class,
             'open_platform'    => OpenPlatform::class,
             'open_work'        => OpenWork::class,
