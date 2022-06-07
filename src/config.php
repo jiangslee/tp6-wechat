@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 配置文件
  *
@@ -31,12 +32,12 @@ return [
             'channels' => [
                 'thinkphp' => [
                     'driver' => 'thinkphp',
-                    'level'  => env('WECHAT_LOG_LEVEL', 'debug'),
+                    'level'  => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
                 ],
                 'default'  => [
                     'driver' => 'daily',
-                    'level'  => env('WECHAT_LOG_LEVEL', 'debug'),
-                    'path'   => env('WECHAT_LOG_FILE', app()->getRuntimePath() . "log/wechat.log"),
+                    'level'  => env('WECHAT.WECHAT_LOG_LEVEL', 'debug'),
+                    'path'   => env('WECHAT.WECHAT_LOG_FILE', app()->getRuntimePath() . "log/wechat.log"),
                 ],
             ],
         ],
@@ -46,13 +47,13 @@ return [
     'official_account' => [
         'default' => [
             // AppID
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'your-app-id'),
+            'app_id' => env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_APPID', 'your-app-id'),
             // AppSecret
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'your-app-secret'),
+            'secret' => env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_SECRET', 'your-app-secret'),
             // Token
-            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),
+            'token' => env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),
             // EncodingAESKey
-            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),
+            'aes_key' => env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),
             /*
              * OAuth 配置
              *
@@ -61,8 +62,8 @@ return [
              */
             //'oauth' => [
             //    'scopes'   => array_map('trim',
-            //        explode(',', env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
-            //    'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
+            //        explode(',', env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
+            //    'callback' => env('WECHAT.WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
             //],
         ],
     ],
@@ -70,43 +71,60 @@ return [
     //第三方开发平台
     //'open_platform'    => [
     //    'default' => [
-    //        'app_id'  => env('WECHAT_OPEN_PLATFORM_APPID', ''),
-    //        'secret'  => env('WECHAT_OPEN_PLATFORM_SECRET', ''),
-    //        'token'   => env('WECHAT_OPEN_PLATFORM_TOKEN', ''),
-    //        'aes_key' => env('WECHAT_OPEN_PLATFORM_AES_KEY', ''),
+    //        'app_id'  => env('WECHAT.WECHAT_OPEN_PLATFORM_APPID', ''),
+    //        'secret'  => env('WECHAT.WECHAT_OPEN_PLATFORM_SECRET', ''),
+    //        'token'   => env('WECHAT.WECHAT_OPEN_PLATFORM_TOKEN', ''),
+    //        'aes_key' => env('WECHAT.WECHAT_OPEN_PLATFORM_AES_KEY', ''),
     //    ],
     //],
 
     //小程序
     //'mini_program'     => [
     //    'default' => [
-    //        'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
-    //        'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-    //        'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
-    //        'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
+    //        'app_id'  => env('WECHAT.WECHAT_MINI_PROGRAM_APPID', ''),
+    //        'secret'  => env('WECHAT.WECHAT_MINI_PROGRAM_SECRET', ''),
+    //        'token'   => env('WECHAT.WECHAT_MINI_PROGRAM_TOKEN', ''),
+    //        'aes_key' => env('WECHAT.WECHAT_MINI_PROGRAM_AES_KEY', ''),
     //    ],
     //],
 
     //支付
-    //'payment'          => [
-    //    'default' => [
-    //        'sandbox'    => env('WECHAT_PAYMENT_SANDBOX', false),
-    //        'app_id'     => env('WECHAT_PAYMENT_APPID', ''),
-    //        'mch_id'     => env('WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
-    //        'key'        => env('WECHAT_PAYMENT_KEY', 'key-for-signature'),
-    //        'cert_path'  => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
-    //        'key_path'   => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),      // XXX: 绝对路径！！！！
-    //        'notify_url' => 'http://example.com/payments/wechat-notify',                           // 默认支付结果通知地址
-    //    ],
-    //    // ...
-    //],
+    'payment'          => [
+        'default' => [
+            'app_id'     => env('WECHAT.WECHAT_PAYMENT_APPID', ''),
+            'mch_id'     => env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
+            'secret_key'        => env('WECHAT.WECHAT_PAYMENT_KEY', 'key-for-signature'),
+            'v2_secret_key'        => env('WECHAT.WECHAT_PAYMENT_V2_KEY', 'key-for-signature'),
+            // 商户证书
+            'certificate'  => root_path('certs') .  env('WECHAT.WECHAT_PAYMENT_CERT_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_cert.pem'),    // XXX: 绝对路径！！！！
+            'private_key'   => root_path('certs').  env('WECHAT.WECHAT_PAYMENT_KEY_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_key.pem'),      // XXX: 绝对路径！！！！
+            'notify_url' => env('WECHAT_PAYMENT_NOTIFY_URL','http://example.com/payments/wechat-notify'),                           // 默认支付结果通知地址
+
+            // 平台证书：微信支付 APIv3 平台证书，需要使用工具下载
+            // 下载工具：https://github.com/wechatpay-apiv3/CertificateDownloader
+            'platform_certs' => [
+                // '/path/to/wechatpay/cert.pem',
+            ],
+
+            /**
+             * 接口请求相关配置，超时时间等，具体可用参数请参考：
+             * https://github.com/symfony/symfony/blob/5.3/src/Symfony/Contracts/HttpClient/HttpClientInterface.php
+             */
+            // 'http' => [
+            //     // 'throw'  => true, // 状态码非 200、300 时是否抛出异常，默认为开启
+            //     // 'timeout' => 5.0,
+            //     // 'base_uri' => 'https://api.mch.weixin.qq.com/', // 如果你在国外想要覆盖默认的 url 的时候才使用，根据不同的模块配置不同的 uri
+            // ],
+        ],
+        // ...
+    ],
 
     //企业微信
     //'work'             => [
     //    'default' => [
     //        'corp_id'  => 'xxxxxxxxxxxxxxxxx',
     //        'agent_id' => 100020,
-    //        'secret'   => env('WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
+    //        'secret'   => env('WECHAT.WECHAT_WORK_AGENT_CONTACTS_SECRET', ''),
     //        //...
     //    ],
     //],

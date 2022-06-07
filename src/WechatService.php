@@ -1,12 +1,14 @@
 <?php
 namespace jiangslee\ThinkWechat;
 
+use app\Request;
 use EasyWeChat\MiniApp\Application as MiniApp;
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Application as OpenPlatform;
 use EasyWeChat\OpenWork\Application as OpenWork;
 use EasyWeChat\Pay\Application as Payment;
 use EasyWeChat\Work\Application as Work;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use think\Service;
 
 class WechatService extends Service
@@ -29,26 +31,37 @@ class WechatService extends Service
             'open_work'        => OpenWork::class,
         ];
         $wechat_default = config('wechat.default') ? config('wechat.default') : [];
-        foreach ($apps as $name => $app) {
+        foreach ($apps as $name => $class) {
             if (!config('wechat.' . $name)) {
                 continue;
             }
-            $configs = config('wechat.' . $name);
-            foreach ($configs as $config_name => $module_default) {
-                $this->app->bind('wechat.' . $name . '.' . $config_name, function ($config = []) use ($app, $module_default, $wechat_default) {
+            $accounts = config('wechat.' . $name);
+            foreach ($accounts as $account => $config) {
+                
+                $this->app->bind("wechat.{$name}.{$account}", function ($close_config = []) use ($class, $config, $wechat_default) {
                     //合并配置文件
-                    $account_config = array_merge($module_default, $wechat_default, $config);
+                    $class_config = array_merge($config, $wechat_default, $close_config);
+                    
                     if (config('wechat.inject_think_logger')) {
-                        $account_config['log']['default'] = 'thinkphp';
+                        $class_config['log']['default'] = 'thinkphp';
                     }
-                    $account_app    = app($app, ['config' => $account_config]);
+                    $app = new $class($class_config);
+                    
                     if (config('wechat.default.use_tp_cache')) {
-                        $account_app['cache'] = app(CacheBridge::class);
+                        if (\is_callable([$app, 'setCache'])) {
+                            $app->setCache(app(CacheBridge::class));
+                        }
                     }
-                    return $account_app;
+                    
+
+                    // if (\is_callable([$app, 'setRequestFromSymfonyRequest'])) {
+                    //     $app->setRequestFromSymfonyRequest(app(HttpFoundationRequest::class));
+                    // }
+
+                    return $app;
                 });
             }
-            if (isset($configs['default'])) {
+            if (isset($accounts['default'])) {
                 $this->app->bind('wechat.' . $name, 'wechat.' . $name . '.default');
             }
         }
