@@ -6,7 +6,7 @@
  * @copyright yzh52521
  */
 
-namespace yzh52521\ThinkWechat;
+namespace jiangslee\ThinkWechat;
 
 use Psr\SimpleCache\CacheInterface;
 

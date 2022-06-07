@@ -6,7 +6,7 @@
  * @copyright  yzh52521
  */
 
-namespace yzh52521\ThinkWechat\Middleware;
+namespace jiangslee\ThinkWechat\Middleware;
 
 use EasyWeChat\OfficialAccount\Application;
 use think\facade\Log;

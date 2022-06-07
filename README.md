@@ -9,7 +9,7 @@ ThinkPHP >= 6.0
 ## 安装
 
 ```bash
-composer require yzh52521/think-wechat
+composer require jiangslee/think-wechat
 ```
 
 ## 配置
@@ -51,15 +51,15 @@ class Wechat extends BaseController
 #### 使用facade
 
 ```php
-use yzh52521\ThinkWechat\Facade;
+use jiangslee\ThinkWechat\Facade;
 
 $officialAccount = Facade::officialAccount();  // 公众号
 $work = Facade::work(); // 企业微信
+$openwork = Facade::open_work(); // 企业微信第三方服务商
 $payment = Facade::payment(); // 微信支付
 $openPlatform = Facade::openPlatform(); // 开放平台
 $miniProgram = Facade::miniProgram(); // 小程序
 $openWork = Facade::openWork(); // 企业微信第三方服务商
-$microMerchant = Facade::microMerchant(); // 小微商户
 ```
 
 以上均支持传入自定义账号:例如
@@ -76,7 +76,7 @@ $officialAccount = Facade::officialAccount('',$config); // 公众号
 ### Oauth登录中间件(ThinkPHP6.0+)
 使用中间件情况下，config的oauth.callback可以随便写~，反正是直接获取了当前URL
 ```php
-\think\facade\Route::rule('user','wechat/user')->middleware(\yzh52521\ThinkWechat\Middleware\OauthMiddleware::class);
+\think\facade\Route::rule('user','wechat/user')->middleware(\jiangslee\ThinkWechat\Middleware\OauthMiddleware::class);
 ```
 
 上面的路由定义了 /user 是需要微信授权的，那么在这条路由的回调 或 控制器对应的方法里， 你就可以从 session('wechat_oauth_user_default') 拿到已经授权的用户信息了。

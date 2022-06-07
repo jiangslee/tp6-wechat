@@ -24,7 +24,7 @@
     }],
     "autoload": {
         "psr-4": {
-            "yzh52521\\ThinkWechat\\": "src/"
+            "jiangslee\\ThinkWechat\\": "src/"
         },
         "files": [
             "src/helper.php"
@@ -33,7 +33,7 @@
     "extra": {
         "think": {
             "services": [
-                "yzh52521\\ThinkWechat\\WechatService"
+                "jiangslee\\ThinkWechat\\WechatService"
             ],
             "config":{
                 "wechat": "src/config.php"

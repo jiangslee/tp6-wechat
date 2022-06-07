@@ -1,8 +1,7 @@
 <?php
-namespace yzh52521\ThinkWechat;
+namespace jiangslee\ThinkWechat;
 
-use EasyWeChat\MicroMerchant\Application as MicroMerchant;
-use EasyWeChat\MiniProgram\Application as MiniProgram;
+use EasyWeChat\MiniApp\Application as MiniApp;
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Application as OpenPlatform;
 use EasyWeChat\OpenWork\Application as OpenWork;
@@ -24,11 +23,10 @@ class WechatService extends Service
         $apps = [
             'official_account' => OfficialAccount::class,
             'work'             => Work::class,
-            'mini_program'     => MiniProgram::class,
+            'mini'             => MiniApp::class,
             'payment'          => Payment::class,
             'open_platform'    => OpenPlatform::class,
             'open_work'        => OpenWork::class,
-            'micro_merchant'   => MicroMerchant::class,
         ];
         $wechat_default = config('wechat.default') ? config('wechat.default') : [];
         foreach ($apps as $name => $app) {
