@@ -9,10 +9,11 @@
 namespace jiangslee\ThinkWechat;
 
 use Psr\SimpleCache\CacheInterface;
+use think\Cache;
 
 class CacheBridge implements CacheInterface
 {
-    protected $cache = null;
+    protected ?Cache $cache = null;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ class CacheBridge implements CacheInterface
 
     public function delete($key)
     {
-        return $this->cache->rm($key);
+        return $this->cache->delete($key);
     }
 
     public function clear()
@@ -41,18 +42,22 @@ class CacheBridge implements CacheInterface
 
     public function getMultiple($keys, $default = null)
     {
+        return $this->cache->getMultiple($keys, $default);
     }
 
     public function setMultiple($values, $ttl = null)
     {
+        return $this->cache->setMultiple($values, $ttl);
     }
 
     public function deleteMultiple($keys)
     {
+        return $this->cache->deleteMultiple($keys);
     }
 
     public function has($key)
     {
-        return !is_null($this->cache->get($key));
+        return $this->cache->has($key);
+        // return !is_null($this->cache->get($key));
     }
 }

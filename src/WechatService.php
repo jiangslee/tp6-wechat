@@ -43,14 +43,14 @@ class WechatService extends Service
                     if (config('wechat.inject_think_logger')) {
                         $class_config['log']['default'] = 'thinkphp';
                     }
+
                     $app = new $class($class_config);
 
                     if (config('wechat.default.use_tp_cache')) {
                         if (\is_callable([$app, 'setCache'])) {
-                            $app->setCache(app(CacheBridge::class));
+                            $app->setCache(app('cache'));
                         }
                     }
-
 
                     // if (\is_callable([$app, 'setRequestFromSymfonyRequest'])) {
                     //     $app->setRequestFromSymfonyRequest(app(HttpFoundationRequest::class));

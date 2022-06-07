@@ -28,7 +28,7 @@ class Facade extends ThinkFacade
     /**
      * @return \EasyWeChat\OfficialAccount\Application|object|\think\App
      */
-    public static function officialAccount($name = '', $config = [])
+    public static function officialAccount($name = '', $config = []): \EasyWeChat\OfficialAccount\Application
     {
         $app = $name ? app('wechat.official_account.' . $name, ["config" => $config]) : app('wechat.official_account', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
@@ -38,7 +38,7 @@ class Facade extends ThinkFacade
     /**
      * @return \EasyWeChat\Work\Application|object|\think\App
      */
-    public static function work($name = '', $config = [])
+    public static function work($name = '', $config = []): \EasyWeChat\Work\Application
     {
         $app = $name ? app('wechat.work.' . $name, ["config" => $config]) : app('wechat.work', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
@@ -46,9 +46,9 @@ class Facade extends ThinkFacade
     }
 
     /**
-     * @return \EasyWeChat\Payment\Application|object|\think\App
+     * @return \EasyWeChat\Pay\Application|object|\think\App
      */
-    public static function payment($name = '', $config = [])
+    public static function payment($name = '', $config = []): \EasyWeChat\Pay\Application
     {
         $app = $name ? app('wechat.payment.' . $name, ["config" => $config]) : app('wechat.payment', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
@@ -56,9 +56,9 @@ class Facade extends ThinkFacade
     }
 
     /**
-     * @return \EasyWeChat\MiniProgram\Application|object|\think\App
+     * @return \EasyWeChat\MiniApp\Application|object|\think\App
      */
-    public static function miniApp($name = '', $config = [])
+    public static function miniApp($name = '', $config = []): \EasyWeChat\MiniApp\Application
     {
         $app = $name ? app('wechat.mini_app.' . $name, ["config" => $config]) : app('wechat.mini_app', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
@@ -68,7 +68,7 @@ class Facade extends ThinkFacade
     /**
      * @return \EasyWeChat\OpenPlatform\Application|object|\think\App
      */
-    public static function openPlatform($name = '', $config = [])
+    public static function openPlatform($name = '', $config = []): \EasyWeChat\OpenPlatform\Application
     {
         $app = $name ? app('wechat.open_platform.' . $name, ["config" => $config]) : app('wechat.open_platform', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
@@ -79,7 +79,7 @@ class Facade extends ThinkFacade
     /**
      * @return \EasyWeChat\OpenWork\Application|object|\think\App
      */
-    public static function openWork($name = '', $config = [])
+    public static function openWork($name = '', $config = []): \EasyWeChat\OpenWork\Application
     {
         $app = $name ? app('wechat.open_work.' . $name, ["config" => $config]) : app('wechat.open_work', ["config" => $config]);
         injectThinkLoggerToWechatApp($app);
