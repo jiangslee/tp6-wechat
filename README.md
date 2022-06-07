@@ -22,16 +22,21 @@ composer require jiangslee/think-wechat:dev-ew6 -vvv
 3. .env 文件
 ```env
 [WECHAT]
+# 公众号
+WECHAT_OFFICIAL_ACCOUNT_APPID=
+WECHAT_OFFICIAL_ACCOUNT_SECRET=
+WECHAT_OFFICIAL_ACCOUNT_TOKEN=
+WECHAT_OFFICIAL_ACCOUNT_AES_KEY=
+WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES=
+WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK=
+
+# 微信支付
 WECHAT_PAYMENT_APPID=
 WECHAT_PAYMENT_MCH_ID=
-# v3 key
 WECHAT_PAYMENT_KEY= 
-# v2 key
 WECHAT_PAYMENT_V2_KEY= 
-# 商户证书路径
 WECHAT_PAYMENT_CERT_PATH=156xxxxxx1/apiclient_cert.pem
 WECHAT_PAYMENT_KEY_PATH=156xxxxxx1/apiclient_key.pem
-# 回调地址
 WECHAT_PAYMENT_NOTIFY_URL=https://api.domain.com/wexin/notify
 ```
 ## 使用
@@ -51,12 +56,14 @@ class Wechat extends BaseController
 
     public function index()
     {
-        //    先初始化微信
+        // 初始化微信
         $app = app('wechat.official_account');
-        $app->server->push(function($message){
-            return 'hello,world';
+        $server = $app->getServer();
+        
+        $server->addMessageListener('text', function ($message) {
+            return sprintf("你对 overtrue 说：“%s”", $message->Content);
         });
-        $app->server->serve()->send();
+        return $server->serve();
     }
 }
 ```
