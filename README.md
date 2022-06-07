@@ -36,13 +36,13 @@ WECHAT_PAYMENT_NOTIFY_URL=https://api.domain.com/wexin/notify
 ```
 ## 使用
 
+
 ### 接受普通消息
 
 ```php
 <?php
 
 namespace app\index\controller;
-
 
 use app\BaseController;
 
@@ -63,6 +63,16 @@ class Wechat extends BaseController
 
 ### 获得SDK实例
 
+#### 直接用 `app()`
+
+```php
+$official_account = app('wechat.official_account');
+$mini = app('wechat.mini_app');
+$payment = app('wechat.payment');
+$work = app('wechat.work');
+$open_platform = app('wechat.open_platform');
+$open_work = app('wechat.open_work');
+```
 #### 使用facade
 
 ```php
