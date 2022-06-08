@@ -100,7 +100,7 @@ return [
             // root_path/certs/1123123123/application_key.pem
             'certificate' => root_path('certs') .  env('WECHAT.WECHAT_PAYMENT_CERT_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_cert.pem'),    // XXX: 绝对路径！！！！
             'private_key' => root_path('certs').  env('WECHAT.WECHAT_PAYMENT_KEY_PATH', env('WECHAT.WECHAT_PAYMENT_MCH_ID', 'your-mch-id') . 'apiclient_key.pem'),      // XXX: 绝对路径！！！！
-            'notify_url' => env('WECHAT_PAYMENT_NOTIFY_URL', 'http://example.com/payments/wechat-notify'),                           // 默认支付结果通知地址
+            'notify_url' => env('WECHAT.WECHAT_PAYMENT_NOTIFY_URL', 'http://example.com/payments/wechat-notify'),                           // 默认支付结果通知地址
 
             // 平台证书：微信支付 APIv3 平台证书，需要使用工具下载
             // 下载工具：https://github.com/wechatpay-apiv3/CertificateDownloader
