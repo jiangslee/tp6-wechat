@@ -63,7 +63,10 @@ class Wechat extends BaseController
         $server->addMessageListener('text', function ($message) {
             return sprintf("你对 overtrue 说：“%s”", $message->Content);
         });
-        return $server->serve();
+        // return $server->serve();
+        
+        $response = $server->serve();
+        return $response->getBody();
     }
 }
 ```
