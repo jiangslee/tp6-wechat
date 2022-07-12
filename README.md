@@ -41,6 +41,11 @@ WECHAT_PAYMENT_NOTIFY_URL=https://api.domain.com/wexin/notify
 ```
 ## 使用
 
+> 注意：在微信后台配置回调url时，报错：“token验证失败”，移除一下`think-trace`
+
+```
+composer remove topthink/think-trace --dev
+```
 
 ### 接受普通消息
 
