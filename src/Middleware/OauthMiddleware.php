@@ -27,31 +27,33 @@ class OauthMiddleware
     {
         $params = $this->getParam($param);
         $account = $params["account"];
-        $scopes = $params["scopes"];
+        $scopes = $params["scopes"] ?: config(sprintf('wechat.official_account.%s.oauth.scopes', $account), ['snsapi_base']);
+
+        if (\is_string($scopes)) {
+            $scopes = \array_map('trim', explode(',', $scopes));
+        }
+
         //定义session
         $session_key = 'wechat_oauth_user_' . $account;
         $session = Session::get($session_key);
-        /** @var Application $officialAccount */
-        $officialAccount = app(sprintf('wechat.official_account.%s', $account));
-        if (!$scopes) {
-            $scopes = config(sprintf('wechat.official_account.%s.oauth.scopes', $account));
-        }
-        if (!$scopes) {
-            $scopes = ['snsapi_base'];
-        }
-        if (is_string($scopes)) {
-            $scopes = array_map('trim', explode(',', $scopes));
-        }
-        Log::info(json_encode($session));
+        Log::info(sprintf('%s:%s', __FILE__, __LINE__), ['session' => $session]);
         if (!$session) {
+            /** @var Application $officialAccount */
+            $officialAccount = app(sprintf('wechat.official_account.%s', $account));
+
+            /** @var \Overtrue\Socialite\Contracts\ProviderInterface|\Overtrue\Socialite\Providers\Wechat */
+            $oauth = $officialAccount->getOAuth();
+
             if ($request->get('code')) {
-                $session = $officialAccount->oauth->user();
-                Session::set($session_key, $session);
+                $session = $oauth->userFromCode($request->query('code'));
+                Session::set([$session_key => $session]);
                 //跳转到登录
-                Log::info($this->getTargetUrl($request));
+                Log::info(sprintf('%s:%s', __FILE__, __LINE__), ['targetUrl' => $this->getTargetUrl($request)]);
                 return redirect($this->getTargetUrl($request));
             }
-            $url = $officialAccount->oauth->scopes($scopes)->redirect($request->url(true))->getTargetUrl();
+
+            $url = $oauth->scopes($scopes)->redirect($request->url(true))->getTargetUrl();
+            Log::info(sprintf('%s:%s', __FILE__, __LINE__), ['redirectUrl' => $url]);
             return redirect($url);
         }
         return $next($request);
