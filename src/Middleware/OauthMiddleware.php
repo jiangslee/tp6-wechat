@@ -52,7 +52,7 @@ class OauthMiddleware
                 return redirect($this->getTargetUrl($request));
             }
 
-            $url = $oauth->scopes($scopes)->redirect($request->url(true))->getTargetUrl();
+            $url = $oauth->scopes($scopes)->redirect($request->url(true));
             Log::info(sprintf('%s:%s', __FILE__, __LINE__), ['redirectUrl' => $url]);
             return redirect($url);
         }
